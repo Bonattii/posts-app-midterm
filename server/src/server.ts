@@ -1,6 +1,7 @@
 require('dotenv').config();
-import Fastify from 'fastify';
+import jwt from '@fastify/jwt';
 import cors from '@fastify/cors';
+import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 
 // Initialize the server and export to be used on the controllers
 export const fastify = Fastify({ logger: true });
@@ -12,6 +13,23 @@ fastify.get('/healthcheck', async () => {
 
 // Register cors
 fastify.register(cors);
+
+// Register jwt into the server
+fastify.register(jwt, {
+  secret: process.env.SECRET!
+});
+
+// Customize the core fastify object to have the authenticate
+fastify.decorate(
+  'authenticate',
+  async (request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      await request.jwtVerify();
+    } catch (error) {
+      return reply.send(error);
+    }
+  }
+);
 
 // Put the server to listen to the port 3333
 async function bootstrap() {

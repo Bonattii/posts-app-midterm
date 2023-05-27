@@ -3,6 +3,9 @@ import jwt from '@fastify/jwt';
 import cors from '@fastify/cors';
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 
+import { userRoutes } from './modules/user/user.route';
+import { userSchemas } from './modules/user/user.schema';
+
 // Initialize the server and export to be used on the controllers
 export const fastify = Fastify({ logger: true });
 
@@ -33,6 +36,14 @@ fastify.decorate(
 
 // Put the server to listen to the port 3333
 async function bootstrap() {
+  // Register the schemas into the server
+  for (const schema of [...userSchemas]) {
+    fastify.addSchema(schema);
+  }
+
+  // Register the routes
+  await fastify.register(userRoutes, { prefix: 'api/users' });
+
   await fastify.listen({
     port: (process.env.PORT as unknown as number) || 3333,
     host: '0.0.0.0'

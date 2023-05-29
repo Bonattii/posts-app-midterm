@@ -18,7 +18,11 @@ export interface Post {
 }
 
 const Posts = () => {
-  const token = localStorage.getItem('token');
+  let token: string | null = null;
+
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
 
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -46,7 +50,7 @@ const Posts = () => {
             <h1 className="mb-12 text-4xl font-semibold text-purple-500">
               All Posts
             </h1>
-            
+
             <PostComponent openPost={true} posts={posts} />
           </div>
         </>

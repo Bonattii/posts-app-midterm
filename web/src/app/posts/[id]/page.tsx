@@ -15,7 +15,11 @@ interface TagProps {
 }
 
 const Tag = ({ params }: TagProps) => {
-  const token = localStorage.getItem('token');
+  let token: string | null = null;
+
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
 
   const [post, setPost] = useState<Post>();
 

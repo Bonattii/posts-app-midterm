@@ -6,7 +6,12 @@ import { useRouter } from 'next/navigation';
 import { api } from '@/lib/api';
 
 const Home = () => {
+  const isAuthenticated = localStorage.getItem('token');
   const router = useRouter();
+
+  if (isAuthenticated) {
+    router.push('/posts');
+  }
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -1,10 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { ArrowRight } from 'phosphor-react';
 
 import { api } from '@/lib/api';
 import { NoAuthenticated } from '@/components/NoAuthenticated';
-import Link from 'next/link';
 
 export interface Post {
   id: string;
@@ -40,6 +41,10 @@ const Posts = () => {
         <NoAuthenticated />
       ) : (
         <div className="mt-12 flex flex-col items-center">
+          <h1 className="mb-12 text-4xl font-semibold text-purple-500">
+            All Posts
+          </h1>
+
           {posts.map(post => (
             <div className="flex w-[500px] flex-col gap-2 px-4" key={post.id}>
               <h1 className="text-2xl font-semibold text-gray-50">
@@ -84,15 +89,29 @@ const Posts = () => {
                     }}
                     as={`/tags/${tag}`}
                     className="
-                  flex items-center justify-center
-                  rounded-full bg-orange-600 px-2 text-xs
-                  uppercase hover:bg-orange-700
-                "
+                      flex items-center justify-center
+                      rounded-full bg-orange-600 px-2 text-xs
+                      uppercase hover:bg-orange-700
+                    "
                   >
                     {tag}
                   </Link>
                 ))}
               </div>
+
+              <Link
+                className="mt-4 flex items-center gap-2 text-sm text-gray-50 hover:text-purple-500"
+                href={{
+                  pathname: `/posts/[id]`,
+                  query: {
+                    title: post.id
+                  }
+                }}
+                as={`/posts/${post.id}`}
+              >
+                Open post
+                <ArrowRight size={14} />
+              </Link>
             </div>
           ))}
         </div>

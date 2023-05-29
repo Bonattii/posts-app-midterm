@@ -1,10 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { ArrowRight } from 'phosphor-react';
 
 import { api } from '@/lib/api';
 import { Post } from '../../posts/page';
-import Link from 'next/link';
 
 interface TagProps {
   params: {
@@ -96,6 +97,20 @@ const Tag = ({ params }: TagProps) => {
               </Link>
             ))}
           </div>
+
+          <Link
+            className="mt-4 flex items-center gap-2 text-sm text-gray-50 hover:text-purple-500"
+            href={{
+              pathname: `/posts/[id]`,
+              query: {
+                title: filteredPost.id
+              }
+            }}
+            as={`/posts/${filteredPost.id}`}
+          >
+            Open post
+            <ArrowRight size={14} />
+          </Link>
         </div>
       ))}
     </div>

@@ -1,14 +1,19 @@
 'use client';
 
-import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 import { api } from '@/lib/api';
 import { Input } from '@/components/Input';
 import { Label } from '@/components/Label';
 
 const Home = () => {
-  const isAuthenticated = localStorage.getItem('token');
+  const [isAuthenticated, setIsAuthenticated] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsAuthenticated(localStorage.getItem('token'));
+  }, []);
+
   const router = useRouter();
 
   if (isAuthenticated) {

@@ -4,6 +4,8 @@ import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { api } from '@/lib/api';
+import { Input } from '@/components/Input';
+import { Label } from '@/components/Label';
 
 const Home = () => {
   const isAuthenticated = localStorage.getItem('token');
@@ -85,22 +87,11 @@ const Home = () => {
         {/* Just show the username if is on the register form */}
         {variant === 'register' && (
           <div className="flex flex-col gap-2">
-            <label
-              className="text-md font-semibold text-gray-100"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="
-              rounded-lg bg-gray-700
-              px-2 py-2
-              text-gray-200 placeholder:text-gray-300
-            "
+            <Label content="Name" htmlFor="name" />
+            <Input
               type="text"
               id="name"
               placeholder="Name"
-              required
               onChange={(event: any) => setName(event.target.value)}
               value={name}
             />
@@ -108,44 +99,22 @@ const Home = () => {
         )}
 
         <div className="flex flex-col gap-2">
-          <label
-            className="text-md font-semibold text-gray-100"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            className="
-              rounded-lg bg-gray-700
-              px-2 py-2
-              text-gray-200 placeholder:text-gray-300
-            "
+          <Label content="Email" htmlFor="email" />
+          <Input
             type="email"
             id="email"
             placeholder="Email"
-            required
             onChange={(event: any) => setEmail(event.target.value)}
             value={email}
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label
-            className="text-md font-semibold text-gray-100"
-            htmlFor="email"
-          >
-            Password
-          </label>
-          <input
-            className="
-              rounded-lg bg-gray-700
-              px-2 py-2
-              text-gray-200 placeholder:text-gray-300
-            "
+          <Label content="Password" htmlFor="password" />
+          <Input
             type="password"
             id="password"
             placeholder="Password"
-            required
             onChange={(event: any) => setPassword(event.target.value)}
             value={password}
           />

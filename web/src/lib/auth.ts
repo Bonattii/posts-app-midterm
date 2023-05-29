@@ -1,5 +1,4 @@
 import decode from 'jwt-decode';
-import { cookies } from 'next/headers';
 
 interface User {
   id: string;
@@ -9,7 +8,7 @@ interface User {
 
 export function getUser(): User {
   // Get the value of the token cookie
-  const token = cookies().get('token')?.value;
+  const token = localStorage.getItem('token');
 
   // Check if it exists
   if (!token) throw new Error('Unauthenthicated');

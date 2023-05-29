@@ -15,11 +15,11 @@ interface CategoryProps {
 }
 
 const Category = ({ params }: CategoryProps) => {
-  let token: string | null = null;
+  const [token, setToken] = useState<string | null>(null);
 
-  if (typeof window !== 'undefined') {
-    token = window.localStorage.getItem('token');
-  }
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, []);
 
   const [categoriesPosts, setCategoriesPosts] = useState<Post[]>([]);
 

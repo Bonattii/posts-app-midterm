@@ -18,11 +18,11 @@ export interface Post {
 }
 
 const Posts = () => {
-  let token: string | null = null;
+  const [token, setToken] = useState<string | null>(null);
 
-  if (typeof window !== 'undefined') {
-    token = window.localStorage.getItem('token');
-  }
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, []);
 
   const [posts, setPosts] = useState<Post[]>([]);
 

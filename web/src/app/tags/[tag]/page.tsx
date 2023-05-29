@@ -43,7 +43,15 @@ const Tag = ({ params }: TagProps) => {
       ) : (
         <>
           <Navbar />
-          <PostComponent openPost={true} posts={filteredPosts} />
+          <div className="mt-12 flex flex-col items-center">
+            <h1 className="mb-12 text-4xl font-semibold text-purple-500">
+              {params.tag.charAt(0).toUpperCase() +
+                params.tag.substring(1) +
+                ' ' +
+                'Posts'}
+            </h1>
+            <PostComponent openPost={true} posts={filteredPosts} />
+          </div>
         </>
       )}
     </>

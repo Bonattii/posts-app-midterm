@@ -42,7 +42,13 @@ const Posts = () => {
       ) : (
         <>
           <Navbar />
-          <PostComponent openPost={true} posts={posts} />
+          <div className="mt-12 flex flex-col items-center">
+            <h1 className="mb-12 text-4xl font-semibold text-purple-500">
+              All Posts
+            </h1>
+            
+            <PostComponent openPost={true} posts={posts} />
+          </div>
         </>
       )}
     </>

@@ -10,11 +10,7 @@ interface PostProps {
 
 export const PostComponent = ({ posts, openPost }: PostProps) => {
   return (
-    <div className="mt-12 flex flex-col items-center">
-      <h1 className="mb-12 text-4xl font-semibold text-purple-500">
-        All Posts
-      </h1>
-
+    <>
       {posts.map(post => (
         <div className="flex w-[500px] flex-col gap-2 px-4" key={post?.id}>
           <h1 className="text-2xl font-semibold text-gray-50">{post?.title}</h1>
@@ -69,7 +65,7 @@ export const PostComponent = ({ posts, openPost }: PostProps) => {
 
           {openPost && (
             <Link
-              className="mt-4 flex items-center gap-2 text-sm text-gray-50 hover:text-purple-500"
+              className="mb-6 mt-4 flex items-center gap-2 text-sm text-gray-50 hover:text-purple-500"
               href={{
                 pathname: `/posts/[id]`,
                 query: {
@@ -84,6 +80,6 @@ export const PostComponent = ({ posts, openPost }: PostProps) => {
           )}
         </div>
       ))}
-    </div>
+    </>
   );
 };

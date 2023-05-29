@@ -6,16 +6,16 @@ import { api } from '@/lib/api';
 import { Post } from '../../posts/page';
 import Link from 'next/link';
 
-interface CategoryProps {
+interface TagProps {
   params: {
-    category: string;
+    tag: string;
   };
 }
 
-const Category = ({ params }: CategoryProps) => {
+const Tag = ({ params }: TagProps) => {
   const token = localStorage.getItem('token');
 
-  const [categoriesPosts, setCategoriesPosts] = useState<Post[]>([]);
+  const [tagsPosts, setTagsPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     api
@@ -25,20 +25,19 @@ const Category = ({ params }: CategoryProps) => {
         }
       })
       .then(response => {
-        setCategoriesPosts(response.data);
+        setTagsPosts(response.data);
       })
       .catch(error => console.log(error));
   }, [token]);
 
-  const filteredPosts = categoriesPosts.filter(categoryPost =>
-    categoryPost.categories.includes(params.category)
+  const filteredPosts = tagsPosts.filter(tagPost =>
+    tagPost.tags.includes(params.tag)
   );
 
   return (
     <div className="mt-12 flex flex-col items-center">
       <h1 className="mb-12 text-4xl font-semibold text-purple-500">
-        {params.category.charAt(0).toUpperCase() + params.category.substring(1)}{' '}
-        Posts
+        {params.tag.charAt(0).toUpperCase() + params.tag.substring(1)} Posts
       </h1>
 
       {filteredPosts.map(filteredPost => (
@@ -58,12 +57,12 @@ const Category = ({ params }: CategoryProps) => {
               <Link
                 key={`${category}-${index}`}
                 href={{
-                  pathname: `/posts/[category]`,
+                  pathname: `/categories/[category]`,
                   query: {
                     title: category
                   }
                 }}
-                as={`/posts/${category}`}
+                as={`/categories/${category}`}
                 className="
                   flex items-center justify-center
                   rounded-full bg-green-600 px-2 text-xs
@@ -81,12 +80,12 @@ const Category = ({ params }: CategoryProps) => {
               <Link
                 key={`${tag}-${index}`}
                 href={{
-                  pathname: `/posts/[category]`,
+                  pathname: `/tags/[tag]`,
                   query: {
                     title: tag
                   }
                 }}
-                as={`/posts/${tag}`}
+                as={`/tags/${tag}`}
                 className="
                   flex items-center justify-center
                   rounded-full bg-orange-600 px-2 text-xs
@@ -103,4 +102,4 @@ const Category = ({ params }: CategoryProps) => {
   );
 };
 
-export default Category;
+export default Tag;

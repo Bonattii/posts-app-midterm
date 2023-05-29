@@ -54,12 +54,12 @@ const Posts = () => {
                   <Link
                     key={`${category}-${index}`}
                     href={{
-                      pathname: `/posts/[category]`,
+                      pathname: `/categories/[category]`,
                       query: {
                         title: category
                       }
                     }}
-                    as={`/posts/${category}`}
+                    as={`/categories/${category}`}
                     className="
                       flex items-center justify-center
                       rounded-full bg-green-600 px-2 text-xs
@@ -77,12 +77,12 @@ const Posts = () => {
                   <Link
                     key={`${tag}-${index}`}
                     href={{
-                      pathname: `/posts/[category]`,
+                      pathname: `/tags/[tag]`,
                       query: {
                         title: tag
                       }
                     }}
-                    as={`/posts/${tag}`}
+                    as={`/tags/${tag}`}
                     className="
                   flex items-center justify-center
                   rounded-full bg-orange-600 px-2 text-xs

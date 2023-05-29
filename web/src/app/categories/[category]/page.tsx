@@ -18,7 +18,7 @@ const Category = ({ params }: CategoryProps) => {
   let token: string | null = null;
 
   if (typeof window !== 'undefined') {
-    token = localStorage.getItem('token');
+    token = window.localStorage.getItem('token');
   }
 
   const [categoriesPosts, setCategoriesPosts] = useState<Post[]>([]);

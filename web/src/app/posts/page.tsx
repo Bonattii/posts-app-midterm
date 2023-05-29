@@ -21,7 +21,7 @@ const Posts = () => {
   let token: string | null = null;
 
   if (typeof window !== 'undefined') {
-    token = localStorage.getItem('token');
+    token = window.localStorage.getItem('token');
   }
 
   const [posts, setPosts] = useState<Post[]>([]);

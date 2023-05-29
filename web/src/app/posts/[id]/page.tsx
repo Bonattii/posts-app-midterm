@@ -18,7 +18,7 @@ const Tag = ({ params }: TagProps) => {
   let token: string | null = null;
 
   if (typeof window !== 'undefined') {
-    token = localStorage.getItem('token');
+    token = window.localStorage.getItem('token');
   }
 
   const [post, setPost] = useState<Post>();

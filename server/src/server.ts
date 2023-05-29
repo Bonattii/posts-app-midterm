@@ -4,7 +4,9 @@ import cors from '@fastify/cors';
 import Fastify, { FastifyReply, FastifyRequest } from 'fastify';
 
 import { userRoutes } from './modules/user/user.route';
+import { postRoutes } from './modules/post/post.route';
 import { userSchemas } from './modules/user/user.schema';
+import { postSchemas } from './modules/post/post.schema';
 
 // Initialize the server and export to be used on the controllers
 export const fastify = Fastify({ logger: true });
@@ -37,12 +39,13 @@ fastify.decorate(
 // Put the server to listen to the port 3333
 async function bootstrap() {
   // Register the schemas into the server
-  for (const schema of [...userSchemas]) {
+  for (const schema of [...userSchemas, ...postSchemas]) {
     fastify.addSchema(schema);
   }
 
   // Register the routes
   await fastify.register(userRoutes, { prefix: 'api/users' });
+  await fastify.register(postRoutes, { prefix: 'api/posts' });
 
   await fastify.listen({
     port: (process.env.PORT as unknown as number) || 3333,
